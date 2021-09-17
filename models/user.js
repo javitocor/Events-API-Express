@@ -4,12 +4,13 @@ const bcrypt = require('bcryptjs');
 var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
-    firstname: {type: String, required: true, min:3, unique: true},
-    lastname: {type: String, min:3, unique: true},
+    username: {type: String, required: true, min:3, unique: true},
+    firstname: {type: String, required: true, min:3},
+    lastname: {type: String, min:3},
     password: {type: String, required: true, min: 5},
     dob: {type: Date},
     admin: {type: Boolean, default: false},
-    email: {type: String},
+    email: {type: String, unique: true},
 });
 
 UserSchema.pre('remove', function(next) {
