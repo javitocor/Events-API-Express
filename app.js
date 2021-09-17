@@ -43,14 +43,6 @@ app.use(
   },
   ticketsRouter
 );
-app.use(
-  '/users/:id/tickets',
-  (req, res, next) => {
-    req.user_id = req.params.id;
-    next();
-  },
-  ticketsRouter
-);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
