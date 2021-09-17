@@ -8,6 +8,12 @@ var EventSchema = new Schema({
     max_tickets: {type: Number, required: true},
 });
 
+EventSchema.pre('remove', function(next) {
+  this.model('Ticket').deleteMany({ event_id: this._id });
+  next();
+});
+
+
 // Virtual for this Event instance URL.
 EventSchema
 .virtual('url')

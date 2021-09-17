@@ -13,8 +13,7 @@ var UserSchema = new Schema({
 });
 
 UserSchema.pre('remove', function(next) {
-  this.model('Post').deleteMany({ author_id: this._id });
-  this.model('Comment').deleteMany({ author_id: this._id });
+  this.model('Ticket').deleteMany({ owner: this._id });
   next();
 });
 
