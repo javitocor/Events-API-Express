@@ -7,6 +7,8 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var eventsRouter = require('./routes/events');
+var ticketsRouter = require('./routes/tickets');
 
 var app = express();
 
@@ -32,6 +34,23 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/events', eventsRouter);
+app.use(
+  '/events/:id/tickets',
+  (req, res, next) => {
+    req.event_id = req.params.id;
+    next();
+  },
+  ticketsRouter
+);
+app.use(
+  '/users/:id/tickets',
+  (req, res, next) => {
+    req.user_id = req.params.id;
+    next();
+  },
+  ticketsRouter
+);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -6,6 +6,7 @@ var Schema = mongoose.Schema;
 var TicketSchema = new Schema({
     owner: {type: Schema.ObjectId, ref: 'User', required: true},
     event_id: {type: Schema.ObjectId, ref: 'Event', required: true},
+    isValidated : { type: Boolean, default: false}
 });
 
 TicketSchema.plugin(autoIncrement.plugin, { model: 'Book', field: 'ticket_number' });
