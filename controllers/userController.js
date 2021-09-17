@@ -21,7 +21,7 @@ exports.user_detail = async (req, res, next) => {
   }
 };
 exports.user_update = async (req, res, next) => {
-  const {email, password} = req.body;
+  const {email, password, firstname, lastname, dob} = req.body;
   const user = new User({
     email,
     password,

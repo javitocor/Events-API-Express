@@ -9,7 +9,7 @@ var TicketSchema = new Schema({
     isValidated : { type: Boolean, default: false}
 });
 
-TicketSchema.plugin(autoIncrement.plugin, { model: 'Book', field: 'ticket_number' });
+TicketSchema.plugin(autoIncrement.plugin, { model: 'Ticket', field: 'ticket_number' });
 
 // Virtual for this Ticket instance URL.
 TicketSchema

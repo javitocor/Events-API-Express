@@ -6,6 +6,7 @@ var EventSchema = new Schema({
     name: {type: String, required: true, min: 3, max: 20},
     date: {type: Date, required: true},
     max_tickets: {type: Number, required: true},
+    ongoing: {type: Boolean, default: true}
 });
 
 EventSchema.pre('remove', function(next) {
