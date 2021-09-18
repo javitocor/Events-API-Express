@@ -23,19 +23,23 @@ const roles = [
 const users = [
   new User({
     username: 'Basic',
-    password: 'password'
+    password: 'password',
+    email: 'example@example.com'
   }),
   new User({
     username: 'ADMIN_BASIC',
-    password: 'password'
+    password: 'password',
+    email: 'example1@example.com'
   }),
   new User({
     username: 'ADMIN_MANAGER',
-    password: 'password'
+    password: 'password',
+    email: 'example2@example.com'
   }),
   new User({
     username: 'SUPERADMIN',
-    password: 'password'
+    password: 'password',
+    email: 'example3@example.com'
   }),
 ]
 
@@ -47,30 +51,64 @@ mongoose
   })
   .then(() => {
     console.log("connected to db in development environment");
-  });
+    roles[1].save();
+    users[1].save();
+    const basic = Role.findOne({name:'ADMIN_BASIC'}).exec();
+    const first = User.findOneAndUpdate({username: 'ADMIN_BASIC'}, {role: basic._id});
+    
+  })
+  .catch(err => {
+    console.log(err.stack);
+    process.exit(1);
+})
+  .then(() => {
+    roles.map(async (p, index) => {
+      await p.save((err, result) => {
+        if (index === roles.length - 1) {
+          console.log("Roles DONE!");
+        }
+      });
+    })})
+  .catch(err => {
+      console.log(err.stack);
+  }).then(() => {
+    users.map(async (p, index) => {
+      await p.save((err, result) => {
+        if (index === users.length - 1) {
+          console.log("Users DONE!");
+        }
+      });
+    })})
+    .catch(err => {
+      console.log(err.stack);
+  }).then(() => {
+    const basic = Role.findOne({name:'ADMIN_BASIC'}).exec();
+    const manager = Role.findOne({name:'ADMIN_MANAGER'}).exec();
+    const superadmin = Role.findOne({name:'SUPERADMIN'}).exec();
 
-roles.map(async (p, index) => {
-  await p.save((err, result) => {
-    if (index === roles.length - 1) {
-      console.log("Roles DONE!");
+    async function updateUsers() {
+      const first = User.findOneAndUpdate({username: 'ADMIN_BASIC'}, {role: basic._id}); 
+      const second = User.findOneAndUpdate({username: 'ADMIN_MANAGER'}, {role: manager._id});
+      const third = User.findOneAndUpdate({username: 'SUPERADMIN'}, {role: superadmin._id});
+      first.save();
+      second.save();
+      third.save();
     }
-  });
+    
+    updateUsers();
+  })
+  .catch(err => {
+    console.log(err.stack);
+})
+  .then(() => {
+    mongoose.disconnect();
+  }).catch(err => {
+    console.log(err.stack);
+    process.exit(1);
 });
 
-users.map(async (p, index) => {
-  await p.save((err, result) => {
-    if (index === users.length - 1) {
-      console.log("Users DONE!");
-    }
-  });
-});
 
-async function updateUsers() {
-  await User.findOneAndUpdate({username: 'ADMIN_BASIC'}, {role: 'ADMIN_BASIC'}); 
-  await User.findOneAndUpdate({username: 'ADMIN_MANAGER'}, {role: 'ADMIN_MANAGER'});
-  await User.findOneAndUpdate({username: 'SUPERADMIN'}, {role: 'SUPERADMIN'});
-}
 
-updateUsers();
-mongoose.disconnect();
+
+
   
