@@ -7,5 +7,4 @@ var RoleSchema = new Schema({
 });
 
 
-// Export model.
-module.exports = mongoose.model('Role', TicketSchema);
+module.exports = mongoose.model('Role', RoleSchema);
