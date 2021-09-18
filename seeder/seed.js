@@ -41,7 +41,6 @@ const users = [
 
 mongoose
   .connect(process.env.MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true})
-  /*.connect(process.env.MONGODB_URI, { useNewUrlParser: true })*/
   .catch(err => {
     console.log(err.stack);
     process.exit(1);

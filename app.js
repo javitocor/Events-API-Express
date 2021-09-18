@@ -18,7 +18,7 @@ var app = express();
 var mongoose = require('mongoose');
 var dev_db_url = process.env.MONGODB_URI;
 var mongoDB = process.env.MONGODB_URI || dev_db_url;
-mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true}, () => console.log('MongoDB has connected successfully.'));
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 /*mongoose.set('useFindAndModify', false);*/
