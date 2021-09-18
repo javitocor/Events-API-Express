@@ -10,7 +10,7 @@ var UserSchema = new Schema({
     lastname: {type: String, min:3},
     password: {type: String, required: true, min: 5},
     dob: {type: Date},
-    role: {type: Schema.ObjectId, ref: 'Role', required: true},
+    role: {type: Schema.ObjectId, ref: 'Role'},
     email: {type: String, unique: true},
 });
 
