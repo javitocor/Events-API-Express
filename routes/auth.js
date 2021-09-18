@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 
-var index_controller = require('../controllers/indexController');
+var index_controller = require('../controllers/authController');
 
 router.post("/signup", index_controller.signup_post);
 //Post login page

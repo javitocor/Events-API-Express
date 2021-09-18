@@ -21,7 +21,9 @@ exports.login_post = async (req, res, next) => {
             if (error) return next(error);
 
             const body = { _id: user._id, username: user.username };
-            const token = jwt.sign({ user: body }, process.env.SECRETORKEY);
+            const token = jwt.sign({ user: body }, process.env.SECRETORKEY, {
+              expiresIn: 631139040 // 20 years in seconds
+            });
 
             return res.json({ token });
           }
