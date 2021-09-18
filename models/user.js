@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const Role = require('../models/role');
 
 var Schema = mongoose.Schema;
 
@@ -25,6 +26,12 @@ UserSchema.pre('save', async function(next) {
     next();
   }
 );
+
+UserSchema.pre('save', async function(next) {
+  const role = Role.find({name = 'Basic'})
+  this.role = role;
+  next();
+});
 
 UserSchema.methods.isValidPassword = async function(password) {
   const user = this;
