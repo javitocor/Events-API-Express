@@ -1,4 +1,4 @@
-const checkIsAdminBasic = (req, res, next) =>  {
+exports.checkIsAdminBasic = (req, res, next) =>  {
   if(req.user && req.user.role.name == 'ADMIN_BASIC') {
     next()
   } else {
@@ -6,7 +6,7 @@ const checkIsAdminBasic = (req, res, next) =>  {
   }
 }
 
-const checkIsAdminManager = (req, res, next) =>  {
+exports.checkIsAdminManager = (req, res, next) =>  {
   if(req.user && req.user.role.name == 'ADMIN_MANAGER') {
     next()
   } else {
@@ -14,21 +14,10 @@ const checkIsAdminManager = (req, res, next) =>  {
   }
 }
 
-const checkIsSuperadmin = (req, res, next) =>  {
+exports.checkIsSuperadmin = (req, res, next) =>  {
   if(req.user && req.user.role.name == 'SUPERADMIN') {
     next()
   } else {
     next(new Error('Your role cannot perform this accion'))
   }
 }
-
-
-
-
-
-
-module.exports = {
-  checkIsAdminBasic,
-  checkIsAdminManager,
-  checkIsSuperadmin,
-};
