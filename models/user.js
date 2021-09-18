@@ -6,7 +6,7 @@ var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
     username: {type: String, required: true, min:3, unique: true},
-    firstname: {type: String, required: true, min:3},
+    firstname: {type: String, min:3},
     lastname: {type: String, min:3},
     password: {type: String, required: true, min: 5},
     dob: {type: Date},
@@ -29,7 +29,7 @@ UserSchema.pre('save', async function(next) {
 
 UserSchema.pre('save', async function(next) {
   const role = Role.find({name = 'Basic'})
-  this.role = role;
+  this.role = role._id;
   next();
 });
 
