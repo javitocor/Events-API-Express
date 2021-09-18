@@ -28,7 +28,7 @@ UserSchema.pre('save', async function(next) {
 );
 
 UserSchema.pre('save', async function(next) {
-  const role = Role.find({name = 'Basic'})
+  const role = Role.find({name: 'Basic'})
   this.role = role._id;
   next();
 });
