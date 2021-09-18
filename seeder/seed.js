@@ -20,19 +20,19 @@ const roles = [
 const users = [
   new User({
     username: 'Basic',
-    password: '1234567890'
+    password: 'password'
   }),
   new User({
     username: 'ADMIN_BASIC',
-    password: '1234567890'
+    password: 'password'
   }),
   new User({
     username: 'ADMIN_MANAGER',
-    password: '1234567890'
+    password: 'password'
   }),
   new User({
     username: 'SUPERADMIN',
-    password: '1234567890'
+    password: 'password'
   }),
 ]
 
