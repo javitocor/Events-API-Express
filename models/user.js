@@ -9,7 +9,7 @@ var UserSchema = new Schema({
     lastname: {type: String, min:3},
     password: {type: String, required: true, min: 5},
     dob: {type: Date},
-    admin: {type: Boolean, default: false},
+    role: {type: Boolean, default: false},
     email: {type: String, unique: true},
 });
 
