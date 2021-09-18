@@ -56,8 +56,8 @@ exports.event_update = async (req, res, next) => {
     _id: req.params.id
   });
   try {
-    await Event.findByIdAndUpdate(req.params.id, event);
-    res.status(201);
+    await Event.findByIdAndUpdate(req.params.id, { $set: req.body });
+    res.status(200);
     res.send('Event updated successfully');
   } catch (error) {
     res.json(error)

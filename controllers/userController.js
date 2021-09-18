@@ -21,18 +21,19 @@ exports.user_detail = async (req, res, next) => {
   }
 };
 exports.user_update = async (req, res, next) => {
-  const {email, password, firstname, lastname, dob} = req.body;
-  const user = new User({
+  const {username, email, password, firstname, lastname, dob} = req.body;
+  const user = {
+    username,
     email,
     password,
     firstname,
     lastname,
     dob,
-    _id: req.params.id
-  });
+    /*_id: req.params.id*/
+  };
   try {
-    await User.findByIdAndUpdate(req.params.id, user);
-    res.status(201);
+    await User.findByIdAndUpdate(req.params.id, { $set: req.body });
+    res.status(200);
     res.send('User updated successfully');
   } catch (error) {
     res.json(error)
