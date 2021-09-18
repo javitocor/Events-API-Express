@@ -1,3 +1,6 @@
+const path = require('path');
+const dotenv = require('dotenv')
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
 const User = require("../models/user");
 const Role = require("../models/role");
 const mongoose = require("mongoose");
@@ -37,7 +40,8 @@ const users = [
 ]
 
 mongoose
-  .connect(process.env.MONGODB_URI, { useNewUrlParser: true })
+  .connect(process.env.MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true})
+  /*.connect(process.env.MONGODB_URI, { useNewUrlParser: true })*/
   .catch(err => {
     console.log(err.stack);
     process.exit(1);

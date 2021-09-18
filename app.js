@@ -5,6 +5,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const cors = require('cors');
+const passport = require('passport');
 
 var authRouter = require('./routes/auth');
 var usersRouter = require('./routes/users');
@@ -20,7 +21,7 @@ var mongoDB = process.env.MONGODB_URI || dev_db_url;
 mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
-mongoose.set('useFindAndModify', false);
+/*mongoose.set('useFindAndModify', false);*/
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // view engine setup
