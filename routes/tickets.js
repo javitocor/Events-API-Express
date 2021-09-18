@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const passport = require('passport');
 
 var ticket_controller = require('../controllers/ticketController');
 
