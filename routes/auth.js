@@ -9,6 +9,6 @@ router.post("/signup", auth_controller.signup_post);
 
 router.post("/login", auth_controller.login_post);
 
-router.get("/logout", auth_controller.logout_get);
+router.get("/logout", passport.authenticate('jwt', { session: false }), auth_controller.logout_get);
 
 module.exports = router;
