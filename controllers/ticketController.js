@@ -2,6 +2,17 @@ const Ticket = require('../models/ticket');
 const Event = require('../models/event');
 const jwt = require('jsonwebtoken');
 
+
+exports.ticket_list = async (req, res, next) => {
+  try {
+    const tickets = Ticket.find({event_id: req.event_id}).populate('owner', "-__v").populate('event', " -__v").select("-__v");
+    res.json(tickets);
+  } catch (error) {
+    res.json(error)
+    next();
+  }
+};
+
 exports.ticket_create = async (req, res, next) => {
   const ticket = new Ticket({
     owner: jwt.decode(req.token).user._id,
