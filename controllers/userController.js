@@ -3,7 +3,7 @@ const Comment = require('../models/ticket');
 
 exports.user_list = async (req, res, next) => {
   try {
-    const users = await User.find();
+    const users = await User.find({});
     res.json(users);
   } catch (error) {
     res.json(error)
@@ -13,8 +13,7 @@ exports.user_list = async (req, res, next) => {
 exports.user_detail = async (req, res, next) => {
   try {
     const user = await User.findById(req.params.id);
-    const tickets = await Ticket.find({ owner: user._id });
-    res.json({user, tickets});
+    res.json(user);
   } catch (error) {
     res.json(error)
     next();

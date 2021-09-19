@@ -1,23 +1,41 @@
-exports.checkIsAdminBasic = (req, res, next) =>  {
-  if(req.user && req.user.role.name == 'ADMIN_BASIC') {
-    next()
-  } else {
-    next(new Error('Your role cannot perform this accion'))
+const User = require('../models/user')
+
+exports.checkIsAdminBasic = async (req, res, next) =>  {
+  try {
+    const user = await User.findById(req.user._id).populate('role').exec();
+    if(req.user && (user.role.name == 'ADMIN_BASIC' || user.role.name == 'ADMIN_MANAGER' || user.role.name == 'SUPERADMIN')) {
+      next()
+    } else {
+      next(new Error('Your role cannot perform this accion'))
+    }
+  } catch(error) {
+    next(error)
   }
 }
 
-exports.checkIsAdminManager = (req, res, next) =>  {
-  if(req.user && req.user.role.name == 'ADMIN_MANAGER') {
-    next()
-  } else {
-    next(new Error('Your role cannot perform this accion'))
+exports.checkIsAdminManager = async (req, res, next) =>  {
+  try {
+    const user = await User.findById(req.user._id).populate('role').exec();
+    if(req.user && (user.role.name == 'ADMIN_MANAGER' || user.role.name == 'SUPERADMIN')) {
+      next()
+    } else {
+      next(new Error('Your role cannot perform this accion'))
+    }
+  } catch(error) {
+    next(error)
   }
 }
 
-exports.checkIsSuperadmin = (req, res, next) =>  {
-  if(req.user && req.user.role.name == 'SUPERADMIN') {
-    next()
-  } else {
-    next(new Error('Your role cannot perform this accion'))
-  }
+exports.checkIsSuperadmin = async (req, res, next) =>  {
+  try {
+    const user = await User.findById(req.user._id).populate('role').exec();
+    if(req.user && user.role.name == 'SUPERADMIN') {
+      next()
+    } else {
+      next(new Error('Your role cannot perform this accion'))
+    }
+  } catch(error) {
+    next(error)
+  }  
 }
+

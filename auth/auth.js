@@ -13,9 +13,13 @@ passport.use(
       passReqToCallback: true
     },
     async (req, username, password, done) => {
+      
       try {
         const user = await User.create({ username, password, email: req.body.email });
-
+        
+        if (!user) {
+          return done(null, false, { message: 'User not created' });
+        }
         return done(null, user);
       } catch (error) {
         done(error);

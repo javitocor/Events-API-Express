@@ -12,7 +12,7 @@ exports.event_list = async (req, res, next) => {
 };;
 exports.event_list_all = async (req, res, next) => {
   try {
-    const events = await Event.find();
+    const events = await Event.find({});
     res.json(events);
   } catch (error) {
     res.json(error)

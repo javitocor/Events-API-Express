@@ -27,12 +27,6 @@ UserSchema.pre('save', async function(next) {
   }
 );
 
-UserSchema.pre('save', async function(next) {
-  const role = Role.find({name: 'Basic'})
-  this.role = role._id;
-  next();
-});
-
 UserSchema.methods.isValidPassword = async function(password) {
   const user = this;
   const compare = await bcrypt.compare(password, user.password);
