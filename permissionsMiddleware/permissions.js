@@ -6,7 +6,7 @@ exports.checkIsAdminBasic = async (req, res, next) =>  {
     if(req.user && (user.role.name == 'ADMIN_BASIC' || user.role.name == 'ADMIN_MANAGER' || user.role.name == 'SUPERADMIN')) {
       next()
     } else {
-      next(new Error('Your role cannot perform this accion'))
+      res.json({error: 'Insufficient privileges for this operation'})
     }
   } catch(error) {
     next(error)
@@ -19,7 +19,7 @@ exports.checkIsAdminManager = async (req, res, next) =>  {
     if(req.user && (user.role.name == 'ADMIN_MANAGER' || user.role.name == 'SUPERADMIN')) {
       next()
     } else {
-      next(new Error('Your role cannot perform this accion'))
+      res.json({error: 'Insufficient privileges for this operation'})
     }
   } catch(error) {
     next(error)
@@ -32,7 +32,7 @@ exports.checkIsSuperadmin = async (req, res, next) =>  {
     if(req.user && user.role.name == 'SUPERADMIN') {
       next()
     } else {
-      next(new Error('Your role cannot perform this accion'))
+      res.json({error: 'Insufficient privileges for this operation'})
     }
   } catch(error) {
     next(error)
