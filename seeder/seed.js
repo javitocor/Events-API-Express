@@ -87,9 +87,9 @@ mongoose
     const superadmin = Role.findOne({name:'SUPERADMIN'}).exec();
 
     async function updateUsers() {
-      const first = User.findOneAndUpdate({username: 'ADMIN_BASIC'}, {role: basic._id}); 
-      const second = User.findOneAndUpdate({username: 'ADMIN_MANAGER'}, {role: manager._id});
-      const third = User.findOneAndUpdate({username: 'SUPERADMIN'}, {role: superadmin._id});
+      const first = await User.findOneAndUpdate({username: 'ADMIN_BASIC'}, {role: basic._id}); 
+      const second = await User.findOneAndUpdate({username: 'ADMIN_MANAGER'}, {role: manager._id});
+      const third = await User.findOneAndUpdate({username: 'SUPERADMIN'}, {role: superadmin._id});
       first.save();
       second.save();
       third.save();
