@@ -13,9 +13,9 @@ exports.ticket_create = async (req, res, next) => {
     if (ticketCount < event.max_tickets) {
       await ticket.save();
       res.status(201);
-      res.send('Ticket created successfully');
+      res.json({message: 'Ticket created successfully'});
     } else {
-      res.send('Sold Out! Cannot create ticket!');
+      res.json({message: 'Sold Out! Cannot create ticket!'});
     }
     
   } catch (error) {
@@ -28,7 +28,7 @@ exports.ticket_update = async (req, res, next) => {
   try {
     await Ticket.findByIdAndUpdate(req.params.id, isValidated);
     res.status(200);
-    res.send('Ticket updated successfully');
+    res.json({message:'Ticket updated successfully'});
   } catch (error) {
     res.json(error)
     next();
@@ -38,7 +38,7 @@ exports.ticket_delete = async (req, res, next) => {
   try {
     await Ticket.findByIdAndDelete(req.params.id);
     res.status(200);
-    res.send('Ticket deleted successfully');
+    res.json({message:'Ticket deleted successfully'});
   } catch (error) {
     res.json(error)
     next();
