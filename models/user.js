@@ -23,10 +23,6 @@ UserSchema.pre('save', async function(next) {
     const hash = await bcrypt.hash(this.password, 10);
 
     this.password = hash;
-    
-    const role = await Role.findOne({ name: 'Basic'});
-    this.role = role._id;
-
     next();
   }
 );

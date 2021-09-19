@@ -22,7 +22,7 @@ exports.event_list_all = async (req, res, next) => {
 exports.event_detail = async (req, res, next) => {
   try {
     const event = await Event.findById(req.params.id).select("-__v");
-    const tickets = await Ticket.find({ event_id: event._id });
+    const tickets = await Ticket.find({ event_id: event._id }).select("-__v");
     res.json({event, tickets});
   } catch (error) {
     res.json(error)

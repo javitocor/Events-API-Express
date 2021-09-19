@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 
 exports.ticket_list = async (req, res, next) => {
   try {
-    const tickets = Ticket.find({event_id: req.event_id}).populate('owner', "-__v").populate('event', " -__v").select("-__v");
+    const tickets = await Ticket.find({event_id: req.event_id}).populate('owner', "-__v -role").populate('event_id', " -__v").select("-__v").exec();
     res.json(tickets);
   } catch (error) {
     res.json(error)
@@ -15,8 +15,8 @@ exports.ticket_list = async (req, res, next) => {
 
 exports.ticket_create = async (req, res, next) => {
   const ticket = new Ticket({
-    owner: jwt.decode(req.token).user._id,
-    event: req.event_id,
+    owner: req.user._id,
+    event_id: req.event_id,
   });
   try {
     const ticketCount = await Ticket.countDocuments({event_id: req.event_id}).exec();
