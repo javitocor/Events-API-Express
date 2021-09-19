@@ -1,5 +1,4 @@
 const User = require('../models/user');
-const Comment = require('../models/ticket');
 
 exports.user_list = async (req, res, next) => {
   try {

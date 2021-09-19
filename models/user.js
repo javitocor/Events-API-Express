@@ -6,10 +6,10 @@ var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
     username: {type: String, required: true, min:3, unique: true},
-    firstname: {type: String, min:3},
-    lastname: {type: String, min:3},
+    firstname: {type: String, min:3, default: null},
+    lastname: {type: String, min:3, default: null},
     password: {type: String, required: true, min: 5},
-    dob: {type: Date},
+    dob: {type: Date, default: null},
     role: {type: Schema.ObjectId, ref: 'Role'},
     email: {type: String, unique: true},
 });
