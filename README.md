@@ -116,7 +116,8 @@ To have this app on your pc, you need to:
       delete http://localhost:3000/events/:id/tickets/:id (SUPERADMIN)
 
   ```
-
+* Bearer token authentication
+  - Once a user has signed up, can make a post request to the login endpoint, the response will be a bearer token that user will have to add to the headers in any other request    to the API to access the protected routes.
 * Seeding
   You can seed the database with the following command:
   ```
